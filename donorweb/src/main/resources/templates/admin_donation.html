@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>dashboard</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+   <!-- custom admin css file link  -->
+   <link rel="stylesheet" href="../css/admin_style.css">
+
+</head>
+<body>
+   
+<div th:insert="admin_header :: header"></div>
+<section class="placed-orders">
+
+   <h1 class="title">donations</h1>
+
+   <div class="box-container">
+      <div class="box" th:each="donation : ${donations}">
+         <p> User name : <span th:text="${donation.user.ho_ten}"></span> </p>
+         <p> Topic : <span th:text="${donation.topic.ten_topic}"></span> </p>
+         <p> Amount : <span th:text="${donation.so_tien}+'$'"></span> </p>
+         <p> Date created : <span th:text="${donation.ngay_tao}"></span> </p>
+         <p> Message : <span th:text="${donation.tin_nhan}"></span> </p>
+         <p> Credit number : <span th:text="${donation.credit_number}"></span> </p>
+         <p> Expiration date : <span th:text="${donation.expiration_date}"></span> </p>
+         <p> Security code : <span th:text="${donation.security_code}"></span> </p>
+         <p> Name on card : <span th:text="${donation.name_card}"></span> </p>
+      </div>
+       <p th:if="${donations==null}" class="empty">no donations yet!</p>
+   </div>
+
+</section>
+<script src="../js/admin_script.js"></script>
+
+</body>
+</html>

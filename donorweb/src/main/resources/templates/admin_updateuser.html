@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Update User</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+   <!-- custom admin css file link  -->
+   <link rel="stylesheet" href="../css/admin_style.css">
+
+</head>
+<body>
+   
+<div th:insert="admin_header :: header"></div>
+
+<section class="update-product">
+
+<form action="/user/update" method="post">
+   <input type="text" class="box" th:value="${user.ho_ten}" required placeholder="enter user name" name="ho_ten">
+   <input type="text" class="box" th:value="${user.email}" required placeholder="enter user email" name="email">
+   <input type="hidden" class="box" th:value="${user.password}" name="password">
+   <input type="text" class="box" th:value="${user.dia_chi}" required placeholder="enter user address" name="dia_chi">
+   <select name="role" class="box">
+      	<option th:each="role : ${roles}" th:selected="${user.role.id == role.id}" th:value="${role.id}" th:text="${role.ten_role}"></option>
+      </select>
+   <input type="hidden" th:value="${user.id}" name="id">
+   <input type="submit" value="Update User" name="update" class="btn">
+   <a href="/admin/user" class="option-btn">go back</a>
+</form>
+<p th:if="${user==null}" class="empty">No Update User Selected</p>
+
+</section>
+<script src="../js/admin_script.js"></script>
+
+</body>
+</html>

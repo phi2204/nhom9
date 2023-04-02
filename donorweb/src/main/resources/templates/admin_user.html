@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Users</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+   <!-- custom admin css file link  -->
+   <link rel="stylesheet" href="../css/admin_style.css">
+
+</head>
+<body>
+   
+<div th:insert="admin_header :: header"></div>
+<div th:if="${param.successupdate}">
+	<div class="message">
+		<span >Updated User success.</span> <i class="fas fa-times"
+			onclick="this.parentElement.remove();"></i>
+	</div>
+</div>
+<div th:if="${param.successdelete}">
+	<div class="message">
+		<span>Deleted User success.</span> <i class="fas fa-times"
+			onclick="this.parentElement.remove();"></i>
+	</div>
+</div>
+<div th:if="${param.successadd}">
+	<div class="message">
+		<span>Added User success.</span> <i class="fas fa-times"
+			onclick="this.parentElement.remove();"></i>
+	</div>
+</div>
+<div th:if="${param.faildeleteforeg}">
+	<div class="message">
+		<span>Failed to delete because the user has a donation.</span> <i class="fas fa-times"
+			onclick="this.parentElement.remove();"></i>
+	</div>
+</div>
+<section class="add-products">
+
+   <form action="/user/add" method="POST">
+      <h3>Add New User</h3>
+      <input type="text" class="box" required placeholder="enter user name" name="ho_ten">
+      <input type="email" class="box" required placeholder="enter user email" name="email">
+      <input type="password" class="box" required placeholder="enter user password" name="password">
+      <input type="text" class="box" required placeholder="enter user address" name="dia_chi">
+      <select name="role" class="box">
+      	<option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.ten_role}"></option>
+      </select>
+      <input type="submit" value="add" name="add" class="btn">
+   </form>
+
+</section>
+
+<section class="placed-orders">
+<h1 class="title">Users</h1>
+   <div class="box-container">
+      <div class="box" th:each="user : ${users}">
+         <form action="" method="post">
+         	<p>Name : <span th:text="${user.ho_ten}"></span></p>
+         	<p>Email: <span th:text="${user.email}"></span> </p>
+	        <p>Address: <span th:text="${user.dia_chi}"></span> </p>
+	        <p>Role: <span th:text="${user.role.ten_role}"></span> </p>
+	        <input type="hidden" name="id" th:value="${user.id}">
+	        <button th:formaction="@{/admin/userupdate}" formmethod="get" class="option-btn">Update</button>
+	        <button th:formaction="@{/user/delete?id={id}(id=${user.id})}" class="delete-btn" th:onclick="return confirm('delete this organization?');">Delete</button>
+         </form>
+      </div>
+     <p th:if="${users==null}" class="empty">No User Added Yet!</p>
+      
+   </div>
+   
+
+</section>
+<script src="../js/admin_script.js"></script>
+
+</body>
+</html>

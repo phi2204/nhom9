@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Organizations</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+   <!-- custom admin css file link  -->
+   <link rel="stylesheet" href="../css/admin_style.css">
+
+</head>
+<body>
+   
+<div th:insert="admin_header :: header"></div>
+<div th:if="${param.successupdate}">
+	<div class="message">
+		<span >Updated Organization success.</span> <i class="fas fa-times"
+			onclick="this.parentElement.remove();"></i>
+	</div>
+</div>
+<div th:if="${param.successdelete}">
+	<div class="message">
+		<span>Deleted Organization success.</span> <i class="fas fa-times"
+			onclick="this.parentElement.remove();"></i>
+	</div>
+</div>
+<div th:if="${param.successadd}">
+	<div class="message">
+		<span>Added Organization success.</span> <i class="fas fa-times"
+			onclick="this.parentElement.remove();"></i>
+	</div>
+</div>
+<div th:if="${param.faildeleteforeg}">
+	<div class="message">
+		<span>Failed to delete because the organization has a topic.</span> <i class="fas fa-times"
+			onclick="this.parentElement.remove();"></i>
+	</div>
+</div>
+<section class="add-products">
+
+   <form action="/tochuc/add" method="POST">
+      <h3>Add New Organization</h3>
+      <input type="text" class="box" required placeholder="enter organization name" name="ten_tc">
+      <input type="text" class="box" required placeholder="enter organization website" name="website">
+      <input type="text" class="box" required placeholder="enter organization description" name="mo_ta">
+      <input type="submit" value="add" name="add" class="btn">
+   </form>
+
+</section>
+
+<section class="placed-orders">
+<h1 class="title">Organizations</h1>
+   <div class="box-container">
+      <div class="box" th:each="tochuc : ${tochucs}">
+         <form action="" method="post">
+         	<p>Name : <span th:text="${tochuc.ten_tc}"></span></p>
+         	<p>Website: <span th:text="${tochuc.website}"></span> </p>
+	        <p>Description: <span th:text="${tochuc.mo_ta}"></span> </p>
+	        <input type="hidden" name="id" th:value="${tochuc.id}">
+	        <button th:formaction="@{/admin/organizationupdate}" formmethod="get" class="option-btn">Update</button>
+	        <button th:formaction="@{/tochuc/delete?id={id}(id=${tochuc.id})}" class="delete-btn" th:onclick="return confirm('delete this organization?');">Delete</button>
+         </form>
+      </div>
+     <p th:if="${tochucs==null}" class="empty">No Organization Added Yet!</p>
+      
+   </div>
+   
+
+</section>
+<script src="../js/admin_script.js"></script>
+
+</body>
+</html>

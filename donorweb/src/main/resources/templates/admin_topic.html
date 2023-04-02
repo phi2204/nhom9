@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>topics</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+   <!-- custom admin css file link  -->
+   <link rel="stylesheet" href="../css/admin_style.css">
+
+</head>
+<body>
+   
+<div th:insert="admin_header :: header"></div>
+<div th:if="${param.successupdate}">
+	<div class="message">
+		<span >Updated topic success.</span> <i class="fas fa-times"
+			onclick="this.parentElement.remove();"></i>
+	</div>
+</div>
+<div th:if="${param.successdelete}">
+	<div class="message">
+		<span>Deleted topic success.</span> <i class="fas fa-times"
+			onclick="this.parentElement.remove();"></i>
+	</div>
+</div>
+<div th:if="${param.successadd}">
+	<div class="message">
+		<span>Added topic success.</span> <i class="fas fa-times"
+			onclick="this.parentElement.remove();"></i>
+	</div>
+</div>
+<section class="add-products">
+
+   <form action="/topic/add" method="POST">
+      <h3>Add New Topic</h3>
+      <select name="tochuc" class="box">
+      	<option th:each="tochuc : ${tochucs}" th:value="${tochuc.id}" th:text="${tochuc.ten_tc}"></option>
+      </select>
+      <input type="text" class="box" required placeholder="enter topic name" name="ten_topic">
+      <input type="text" class="box" required placeholder="enter topic description" name="mo_ta">
+      <textarea name="noi_dung" class="box" required placeholder="enter topic details" cols="30" rows="10"></textarea>
+      <input type="number" required class="box" placeholder="enter topic goal" name="so_tien">
+      <input type="text" required class="box" placeholder="enter topic image" name="img">
+      <input type="submit" value="add topic" name="add" class="btn">
+   </form>
+
+</section>
+
+<section class="show-products">
+
+   <div class="box-container">
+      <div class="box" th:each="topic : ${topics}">
+         <form action="" method="post">
+         	<div class="price" th:text="${topic.ten_topic}"></div>
+	         <img class="image" th:src="@{../img/causes/{img_topic}(img_topic=${topic.img})}" width=200 height=200 alt="">
+	         <div class="name" th:text="${topic.mo_ta}"></div>
+	         <div class="name" th:text="${topic.so_tien} +'$'"></div>
+	         <input type="hidden" name="id" th:value="${topic.id}">
+	         <button th:formaction="@{/admin/topicupdate}" formmethod="get" class="option-btn">update</button>
+	         <button th:formaction="@{/topic/delete?id={id}(id=${topic.id})}" class="delete-btn" th:onclick="return confirm('delete this topic?');">delete</button>
+         </form>
+      </div>
+     <p th:if="${topics==null}" class="empty">No topics added yet!</p>
+      
+   </div>
+   
+
+</section>
+<script src="../js/admin_script.js"></script>
+
+</body>
+</html>

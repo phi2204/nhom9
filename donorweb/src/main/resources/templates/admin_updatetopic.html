@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Update Topic</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+   <!-- custom admin css file link  -->
+   <link rel="stylesheet" href="../css/admin_style.css">
+
+</head>
+<body>
+   
+<div th:insert="admin_header :: header"></div>
+
+<section class="update-product">
+
+<form action="/topic/update" method="post">
+   <img class="image" th:src="@{../img/causes/{img_topic}(img_topic=${topic.img})}" width=200 height=200 alt="">
+   <input type="hidden" th:value="${topic.id}" name="id">
+   <input type="hidden" th:value="${topic.img}" name="image">
+   <select name="tochuc" class="box">
+      	<option th:each="tochuc : ${tochucs}" th:selected="${topic.tochuc.id == tochuc.id}" th:value="${tochuc.id}" th:text="${tochuc.ten_tc}"></option>
+      </select>
+   <input type="text" th:value="${topic.ten_topic}" class="box" required placeholder="update topic name" name="ten_topic">
+   <input type="text" th:value="${topic.mo_ta}" class="box" required placeholder="update topic description" name="mo_ta">
+   <textarea name="noi_dung" th:text="${topic.noi_dung}" class="box" required placeholder="enter topic details" cols="30" rows="10"></textarea>
+   <input type="number" th:value="${topic.so_tien}" required class="box" placeholder="enter topic goal" name="so_tien">
+   <input type="hidden" th:value="${topic.money_donor}" name="money_donor">
+   <input type="text" th:value="${topic.img}" required class="box" placeholder="enter topic image" name="img">
+   <input type="submit" value="Update Topic" name="update" class="btn">
+   <a href="/admin/topic" class="option-btn">go back</a>
+</form>
+<p th:if="${topic==null}" class="empty">No Update Topic Select</p>
+
+</section>
+<script src="../js/admin_script.js"></script>
+
+</body>
+</html>

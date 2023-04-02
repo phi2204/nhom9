@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Change Password</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+<!-- <link rel="manifest" href="site.webmanifest"> -->
+<link rel="shortcut icon" type="image/x-icon" href="../img/favicon.png">
+<!-- Place favicon.ico in the root directory -->
+
+<!-- CSS here -->
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/owl.carousel.min.css">
+<link rel="stylesheet" href="../css/magnific-popup.css">
+<link rel="stylesheet" href="../css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/themify-icons.css">
+<link rel="stylesheet" href="../css/nice-select.css">
+<link rel="stylesheet" href="../css/flaticon.css">
+<link rel="stylesheet" href="../css/gijgo.css">
+<link rel="stylesheet" href="../css/animate.css">
+<link rel="stylesheet" href="../css/slicknav.css">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+	<!-- header-start -->
+	<header>
+		<div class="header-area ">
+			<div class="header-top_area">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xl-6 col-md-12 col-lg-8">
+							<div class="short_contact_list">
+								<ul>
+									<li><a href="#"> <i class="fa fa-phone"></i> +1 (454)
+											556-5656
+									</a></li>
+									<li><a href="#"> <i class="fa fa-envelope"></i>Yourmail@gmail.com
+									</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-xl-6 col-md-6 col-lg-4">
+							<div class="social_media_links d-none d-lg-block">
+								<a th:if=${session.user_id==null} href="/"
+									th:href="@{/user/loginform}"> Sign in </a> <a
+									th:if=${session.user_id==null} href="/"
+									th:href="@{/user/registrationform}"> Sign up </a> <a
+									th:if=${session.user_id!=null} th:text="${session.user_name}"></a>
+								<a th:if=${session.user_id!=null} href="/"
+									th:href="@{/user/logout}"> Log out </a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="sticky-header" class="main-header-area">
+				<div class="container-fluid">
+					<div class="row align-items-center">
+						<div class="col-xl-3 col-lg-3">
+							<div class="logo">
+								<a href="index.html"> <img src="../img/logo.png" alt="">
+								</a>
+							</div>
+						</div>
+						<div class="col-xl-9 col-lg-9">
+							<div class="main-menu">
+								<nav>
+									<ul id="navigation">
+										<li><a href="/" th:href="@{/home/index}">Home</a></li>
+										<li><a href="/" th:href="@{/topic/all}">topic</a></li>
+									</ul>
+								</nav>
+
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="mobile_menu d-block d-lg-none"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- header-end -->
+	<br>
+	<br>
+	<!-- Change Password form -->
+	<div class="reson_area section_padding">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3">
+					<h1>Change Password</h1>
+					<form th:action="@{/user/login}" method="post">
+						<div th:if=${param.error} style="font-size:16px">
+							<div class="alert alert-info">Invalid username or password.</div>
+						</div>
+
+						<div class="form-group" style="font-size:25px">
+							<label class="control-label" for="username"> Username: </label> <input
+								type="email" id="email" name="email" class="form-control"
+								placeholder="Enter Email" autofocus="autofocus">
+						</div>
+
+						<div class="form-group" style="font-size:25px">
+							<label class="control-label" for="password"> New Password: </label> <input
+								type="password" id="password" name="password"
+								class="form-control" placeholder="New Password">
+						</div>
+
+						<div class="form-group" style="font-size:25px">
+							<div class="row">
+								<div class="col-md-6 col-md-offset-3">
+									<input type="submit" name="login-submit" id="login-submit"
+										class="form-control btn btn-primary" value="Change" />
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

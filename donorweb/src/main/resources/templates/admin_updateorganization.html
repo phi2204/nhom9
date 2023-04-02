@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Update Organization</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+   <!-- custom admin css file link  -->
+   <link rel="stylesheet" href="../css/admin_style.css">
+
+</head>
+<body>
+   
+<div th:insert="admin_header :: header"></div>
+
+<section class="update-product">
+
+<form action="/tochuc/update" method="post">
+   <input type="text" class="box" th:value="${tochuc.ten_tc}" required placeholder="enter organization name" name="ten_tc">
+   <input type="text" class="box" th:value="${tochuc.website}" required placeholder="enter organization website" name="website">
+   <input type="text" class="box" th:value="${tochuc.mo_ta}" required placeholder="enter organization description" name="mo_ta">
+   <input type="hidden" th:value="${tochuc.id}" name="id">
+   <input type="submit" value="Update Organization" name="update" class="btn">
+   <a href="/admin/organization" class="option-btn">go back</a>
+</form>
+<p th:if="${tochuc==null}" class="empty">No Update Organization Select</p>
+
+</section>
+<script src="../js/admin_script.js"></script>
+
+</body>
+</html>
